@@ -179,10 +179,9 @@ anything_multiple_sources_with_properties(sources,anything_tmp_properties){
     WinSet, AlwaysOnTop, On, ahk_id %anything_wid%
     anything_on_select(tmpSources,matched_candidates) ;  on select event
     anything_beep(0)                                  ; donot beep when press Ctrl-n Ctrl-p ...
-    
+
     ;;if only one candidate left automatically execute it
-    ;; if source["anything-execute-action-at-once-if-one"]="yes"
-    if ( matched_candidates.maxIndex() == 1)
+    if (matched_candidates.maxIndex() == 1) and (source["anything-execute-action-at-once-if-one"] = "yes")
     {
         selectedRowNum:= LV_GetNext(0)
         LV_GetText(source_index, selectedRowNum,2) ;;populate source_index
@@ -192,11 +191,10 @@ anything_multiple_sources_with_properties(sources,anything_tmp_properties){
             action:= anything_get_default_action(tmpSources[source_index]["action"])
             anything_callFuncByNameWithOneParam(action ,matched_candidates[selectedRowNum])
             anything_exit() ;;first quit .then execute action
-            return 
+            return
         }
     }
-
-    if ( matched_candidates.maxIndex() = 2)
+    else if ( matched_candidates.maxIndex() = 2)
     {
         selectedRowNum:= LV_GetNext(0)
         LV_GetText(source_index, selectedRowNum,2) ;;populate source_index

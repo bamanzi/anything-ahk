@@ -1,14 +1,14 @@
 #NoTrayIcon
 #SingleInstance force
 ; SetWorkingDir %A_ScriptDir%
-#include c:\ahk\ahk_scripts\anything.ahk
-#include c:\ahk\ahk_scripts\anything-run.ahk
-#include c:\ahk\ahk_scripts\anything-run-launch-plugin.ahk
-#include c:\ahk\ahk_scripts\anything-favorite-directories.ahk
-#include c:\ahk\ahk_scripts\anything-window-switch.ahk
-#include c:\ahk\ahk_scripts\anything-process-manager.ahk
-#include c:\ahk\ahk_scripts\anything-services.ahk
-#include c:\ahk\ahk_scripts\anything-explorer-history.ahk
+#include anything.ahk
+#include anything-run.ahk
+#include anything-run-launch-plugin.ahk
+#include anything-favorite-directories.ahk
+#include anything-window-switch.ahk
+#include anything-process-manager.ahk
+#include anything-services.ahk
+#include anything-explorer-history.ahk
 
 ; anything-source: <anything_explorer_history_source>       defined in anything-explorer-history.ahk .
 ; anything-source: <anything_favorite_directories_source>   defined in anything-favorite-directories.ahk
@@ -18,12 +18,12 @@
 
 ; anything-source: <anything_window_switcher_source>        define in anything-window-switch.ahk
 
-; anything-source: <anything_services_source>        define in anything-services.ahk 
+; anything-source: <anything_services_source>        define in anything-services.ahk
 
 ; anything-source: <anything_process_manager_source>        define in anything-process-manager.ahk
 
 
-f3::
+#+o::
 sources:=Array()
 sources.insert(anything_explorer_history_source)
 sources.insert(anything_favorite_directories_source)
@@ -34,7 +34,7 @@ anything_multiple_sources(sources)
 return
 
 
-#r::
+#+r::
 #Include c:\
 SetWorkingDir, c:\
 my_anything_properties2:=Object()
@@ -45,14 +45,14 @@ anything_multiple_sources_with_properties(Array(anything_run_source, anything_ru
 
 return
 
-^f3::
+#+t::
  sources:=Array()
  sources.Insert(anything_process_manager_source)
  ; sources.Insert(anything_services_source)
  anything_multiple_sources(sources)
 return
- 
-^f4::
+
+#+p::
  sources:=Array()
  sources.Insert(anything_services_source)
  ; sources.Insert(anything_process_manager_source)
@@ -65,16 +65,18 @@ return
      anything_multiple_sources(sources)
  }
 return
- 
+
 #Tab::                          ;  I remap CapsLock Ctrl ,Alt , so ...
 my_anything_properties:=Object()
 my_anything_properties["win_width"]:= 900
 my_anything_properties["win_height"]:= 380
 my_anything_properties["anything_use_large_icon"]:=1
 my_anything_properties["FontSize"]:= 15
- 
+
+anything_window_switcher_source["anything-execute-action-at-once-if-one"]:="no"
+
 sources:=Array()
 sources.insert(anything_window_switcher_source)
 anything_multiple_sources_with_properties(sources,my_anything_properties)
 return
- 
+
