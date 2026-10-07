@@ -10,6 +10,9 @@ Documentation:  <https://jixiuf.github.io/my_autohotkey_scripts/anything-doc.htm
 ### anything_window_switcher_source
 
 - [x] turn off anything_window_switcher_source["anything-execute-action-at-once-if-one"]
-
+- [x] auto-adjust anything window size by monitor size
+- [ ] popup anything window on current monitor #multi-monitor
+- [ ] new action: MoveWindowToMouseMonitor #multi-monitor
+- [ ] new action: MoveWindowTo{Next,Prev}Monitor  #multi-monitor
 
 

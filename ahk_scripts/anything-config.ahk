@@ -66,17 +66,25 @@ return
  }
 return
 
-#Tab::                          ;  I remap CapsLock Ctrl ,Alt , so ...
-my_anything_properties:=Object()
-my_anything_properties["win_width"]:= 900
-my_anything_properties["win_height"]:= 380
-my_anything_properties["anything_use_large_icon"]:=1
-my_anything_properties["FontSize"]:= 15
+#Tab::
+    ;; auto-adjust anything window size by screen size
+    SysGet, mon, MonitorWorkArea, 1
+    mon_width := (monRight - monLeft) * 96 / A_ScreenDPI
+    mon_height :=(monBottom - monTop) * 96 / A_ScreenDPI
+    ;; TODO: [multi-monitor] show anything window in current (mouse) monitor
 
-anything_window_switcher_source["anything-execute-action-at-once-if-one"]:="no"
+    my_anything_properties:=Object()
+    my_anything_properties["win_width"]:= mon_width * 0.8
+    my_anything_properties["win_height"]:= mon_height * 0.8
+    my_anything_properties["anything_use_large_icon"]:=1
+    my_anything_properties["FontSize"]:= 15
 
-sources:=Array()
-sources.insert(anything_window_switcher_source)
-anything_multiple_sources_with_properties(sources,my_anything_properties)
+    anything_window_switcher_source["anything-execute-action-at-once-if-one"]:="no"
+
+    ;; TODO: more actions: MoveWindowToMouseMonitor, MoveWindowToNextMonitor
+
+    sources:=Array()
+    sources.insert(anything_window_switcher_source)
+    anything_multiple_sources_with_properties(sources,my_anything_properties)
 return
 
